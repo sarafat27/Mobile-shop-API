@@ -17,6 +17,8 @@ const displayPhone = phones => {
     phoneContainer.textContent = '';
     //clear no result area
     document.getElementById('no-result').textContent = '';
+    //clear details area
+    document.getElementById('show-details').textContent = '';
 
     if (phones.length === 0) {
         const noResult = document.getElementById('no-result');
@@ -61,12 +63,28 @@ const displayDetails = detail => {
     showDetails.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
-             <img height="450px" width="350px" src="${detail.image}">
-             <h4>${detail.releaseDate ? detail.releaseDate : 'No release date found'}</h4>
-             <p>${detail.mainFeatures.displaySize}</p>
-             <p>${detail.mainFeatures.memory}</p>
-             <p>${detail.mainFeatures.chipSet}</p>
-             <p>${detail.mainFeatures.storage}</p>    
+    <img height="450px" width="350px" src="${detail.image}">
+    <h6>${detail.releaseDate ? detail.releaseDate : 'No release date found'}</h6>
+
+    <h3>Main configures :</h3>
+    <p><strong>Display size : </strong>${detail.mainFeatures.displaySize}</p>
+    <p><strong>Memory : </strong>${detail.mainFeatures.memory}</p>
+    <p><strong>Chipset : </strong>${detail.mainFeatures.chipSet}</p>
+    <p><strong>Storage : </strong>${detail.mainFeatures.storage}</p>  
+    
+    <h3>Sensors : </h3>
+        <p>1. ${detail.mainFeatures.sensors[0]}</p>
+        <p>2. ${detail.mainFeatures.sensors[1]}</p>
+        <p>3. ${detail.mainFeatures.sensors[2]}</p>
+        <p>4. ${detail.mainFeatures.sensors[3]}</p>
+        <p>5. ${detail.mainFeatures.sensors[4]}</p>
+        <p>6. ${detail.mainFeatures.sensors[5]}</p>
+
+    <h3>Others: </h3>
+        <p><strong>Bluetooth : </strong>${detail.others.Bluetooth}</p>
+        <p><strong>GPS : </strong>${detail.others.GPS}</p>
+        <p><strong>USB : </strong>${detail.others.USB}</p>
+        <p><strong>WLAN : </strong>${detail.others.WLAN}</p>
     `;
     showDetails.appendChild(div)
 }
