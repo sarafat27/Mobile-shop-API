@@ -72,7 +72,6 @@ const displayDetails = detail => {
     const showDetails = document.getElementById('show-details');
     showDetails.textContent = '';
     const div = document.createElement('div');
-    div.classList.add('text-white');
     div.innerHTML = `
     <img height="450px" width="350px" src="${detail.image}">
     <h4 class="card-title">${detail.brand}</h4>
