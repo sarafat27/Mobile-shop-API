@@ -11,14 +11,20 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body class="container">
+<body class="container bg-dark">
     <header>
         <!-- search area -->
-        <h1 class="text-center my-3">Search your favourite phone</h1>
+        <h1 class="text-center text-white my-3">Search your favourite phone</h1>
         <div class="input-group mb-3 w-50 mx-auto">
             <input id="search-field" type="text" class="form-control" placeholder="search a phone">
             <button onclick="loadPhone()" class="btn btn-outline-secondary ms-3 btn-dark text-white"
                 type="button">Search</button>
+        </div>
+        <!-- spinner area -->
+        <div id="spinner" class="text-center">
+            <div class="spinner-border text-white" role="status">
+                <span class="visually-hidden"></span>
+            </div>
         </div>
     </header>
     <main>
@@ -31,7 +37,7 @@
 
         </div>
         <!-- display area -->
-        <div id="phone-container" class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+        <div id="phone-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
         </div>
     </main>
 

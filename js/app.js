@@ -1,9 +1,20 @@
+//spinner show
+const showSpinner = displayType => {
+    document.getElementById('spinner').style.display = displayType;
+}
+showSpinner('none');
+
+//load data
 const loadPhone = () => {
     const inputField = document.getElementById('search-field');
     const inputText = inputField.value;
     //clear input field
     inputField.value = '';
-    // load data
+    //clear no result area
+    document.getElementById('no-result').textContent = '';
+    //show spinner
+    showSpinner('block');
+
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`;
     fetch(url)
         .then(res => res.json())
@@ -23,7 +34,7 @@ const displayPhone = phones => {
     if (phones.length === 0) {
         const noResult = document.getElementById('no-result');
         const h1 = document.createElement('h1');
-        h1.classList.add('text-center');
+        h1.classList.add('text-center', 'text-white');
         h1.innerText = 'No phone found';
         noResult.appendChild(h1);
     }
@@ -31,12 +42,11 @@ const displayPhone = phones => {
         //showing phone within twewnty 
         const twentyPhones = phones.slice(0, 20);
         twentyPhones.forEach(phone => {
-            // console.log(phone)
             const div = document.createElement('div');
             div.classList.add('col');
             div.innerHTML = `
             <div class="card rounded-3">
-                <img height="400px" width="150px" src="${phone.image}" class="card-img-top" alt="...">
+                <img height="400px" width="150px" src="${phone.image}" class="card-img-top p-4" alt="...">
                 <div class="card-body">
                     <h4 class="card-title">${phone.brand}</h4>
                     <p class="card-text">${phone.phone_name}</p>
@@ -47,6 +57,7 @@ const displayPhone = phones => {
             phoneContainer.appendChild(div);
         })
     }
+    showSpinner('none');
 }
 //load detail 
 const loadDetails = phoneId => {
@@ -58,12 +69,14 @@ const loadDetails = phoneId => {
 
 //display details
 const displayDetails = detail => {
-    console.log(detail)
     const showDetails = document.getElementById('show-details');
     showDetails.textContent = '';
     const div = document.createElement('div');
+    div.classList.add('text-white');
     div.innerHTML = `
     <img height="450px" width="350px" src="${detail.image}">
+    <h4 class="card-title">${detail.brand}</h4>
+    <h4 class="card-title">${detail.phone_name ? detail.phone_name : ''}</h4>
     <h6>${detail.releaseDate ? detail.releaseDate : 'No release date found'}</h6>
 
     <h3>Main configures :</h3>
@@ -81,10 +94,10 @@ const displayDetails = detail => {
         <p>6. ${detail.mainFeatures.sensors[5]}</p>
 
     <h3>Others: </h3>
-        <p><strong>Bluetooth : </strong>${detail.others.Bluetooth}</p>
-        <p><strong>GPS : </strong>${detail.others.GPS}</p>
-        <p><strong>USB : </strong>${detail.others.USB}</p>
-        <p><strong>WLAN : </strong>${detail.others.WLAN}</p>
+        <p><strong>Bluetooth : </strong>${detail.others?.Bluetooth ? detail.others.Bluetooth : ''}</p>
+        <p><strong>GPS : </strong>${detail.others?.GPS ? detail.others.GPS : ''}</p>
+        <p><strong>USB : </strong>${detail.others?.USB ? detail.others.USB : ''}</p>
+        <p><strong>WLAN : </strong>${detail.others?.WLAN ? detail.others.WLAN : ''}</p>
     `;
     showDetails.appendChild(div)
 }
