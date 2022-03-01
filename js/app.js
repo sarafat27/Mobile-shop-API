@@ -9,5 +9,27 @@ const loadPhone = () => {
 }
 
 // display phone
+const displayPhone = phones => {
+    const phoneContainer = document.getElementById('phone-container');
+
+    //showing phone within twewnty 
+    const twentyPhones = phones.slice(0, 20);
+    twentyPhones.forEach(phone => {
+        console.log(phone)
+        const div = document.createElement('div');
+        div.classList.add('col');
+        div.innerHTML = `
+            <div class="card rounded-3">
+                <img height="400px" width="150px" src="${phone.image}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title">${phone.brand}</h4>
+                    <p class="card-text">${phone.phone_name}</p>
+                    <p class="text-center text-white bg-dark rounded-3 px-4 py-2">Show details</p>
+                </div>
+            </div>
+        `;
+        phoneContainer.appendChild(div);
+    })
+}
 
 
