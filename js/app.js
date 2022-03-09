@@ -55,7 +55,35 @@ const displayPhone = phones => {
             </div>
         `;
             phoneContainer.appendChild(div);
-        })
+        });
+        //display showAll button
+        if (phones.length > 20) {
+            const showAllBtn = document.getElementById('show-all');
+            showAllBtn.classList.remove('d-none');
+            //show rest phones
+            showAllBtn.addEventListener('click', function () {
+                showAllBtn.classList.add('d-none');
+                const arrayLength = phones.length + 1;
+                const restPhones = phones.slice(20, arrayLength);
+                restPhones.forEach(phone => {
+                    const div = document.createElement('div');
+                    div.classList.add('col');
+                    div.innerHTML = `
+                    <div class="card rounded-3">
+                        <img height="400px" width="150px" src="${phone.image}" class="card-img-top p-4" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title">${phone.brand}</h4>
+                            <p class="card-text">${phone.phone_name}</p>
+                            <p onclick="loadDetails('${phone.slug}')" class="text-center text-white bg-dark rounded-3 px-4 py-2">Show details</p>
+                        </div>
+                    </div>
+                `;
+                    phoneContainer.appendChild(div);
+                });
+
+            })
+
+        }
     }
     showSpinner('none');
 }
